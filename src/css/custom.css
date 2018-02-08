@@ -1,0 +1,31 @@
+/* Custom css file for this project*/
+body
+{
+	margin: 0px;
+}
+*
+{
+	font-family: 'Roboto', 'sans-serif';
+}
+/*HEADER BEGIN*/
+header
+{
+	height: 75px;
+	background: rgba(0,0,0,0.2);
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.staticLeft
+{
+	font-size: 20px;
+}
+.mainMenu li
+{
+	list-style: none;
+	padding: 5px;
+	display: inline-block;
+}
+/*HEADER END*/
