@@ -1,8 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AddBtn from "../components/AddBtn";
+import Routes from '../routes' 
 
+import ReactDOM from "react-dom";
 import {Header} from "../components/Header";
 import {Home} from "../components/Home";
 
@@ -11,7 +10,7 @@ class App extends React.Component {
 		return (
 			<div className="mainContainer">
 				<Header/>
-				<Home/>
+				<Routes/>
 			</div>
 		);
 	}

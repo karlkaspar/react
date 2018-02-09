@@ -9,8 +9,8 @@ export class Header extends React.Component {
 				</div>
 				<div className="mainMenu">
 					<ul>
-						<li><a href="#">Names</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="/">Names</a></li>
+						<li><a href="about">About</a></li>
 					</ul>
 				</div>
 			</header>
