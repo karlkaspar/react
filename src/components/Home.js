@@ -1,57 +1,65 @@
 import React from "react";
-import Request from 'react-http-request';
+import { createStore } from "redux";
+
+
+const persons = (state, action) => {
+	switch (action.type) {
+		case "ADD": 
+			state = state + action.payload;
+			break;
+		case "DELETE":
+			break;
+	}
+	return state;
+};
+
+const store = createStore(persons, 0);
+
+
 
 export default (props) => {
 	console.log(props);
 	function getPerson(){
-		
-		console.log("test");
-		/*<table>
-		<tbody>
-			<tr>
-			<th>First Name</th>
-			<th>Surname</th>
-			<th>Gender</th>
-			<th>Region</th>
-		</tr>
-			<tr>
+		console.log("getPerson()");
+		store.dispatch({
+			type: "ADD",
+			payload: 1
+		});
+		fetch("http://uinames.com/api/").
+		then((Response)=> Response.json()).
+		then((foundResponse)=>
+		{
+			let mainTable = document.querySelector("#mainTable");
+			let person = foundResponse;
+			console.log(person);
+			store.subscribe(() => {
+				console.log("Store updated", store.getState());
+			});
+			store.dispatch({
+				type: "ADD",
+				payload: 0
+			});
 
-				<td>{person.name}</td>	
-				<td>{person.surname}</td>	
-				<td>{person.gender}</td>	
-				<td>{person.region}</td>	
-			</tr>
-		</tbody>
-	</table>;*/
+			let newEl = "<tr><th>"+person.name+"</th><th>"+person.surname+"</th><th>"+person.gender+"</th><th>"+person.region+"</th></tr>";
+			mainTable.innerHTML += newEl;
+
+		})
 	}
-	return (
-		<Request url='http://uinames.com/api/' method='get' accept='application/json' verbose={true}>
-	        {
-	            ({error, result, loading}) => {
-		            if (loading) {
-		              return <div>loading...</div>;
-		            } else {
-		            	var person = result['body'];
-		            	console.log(person);
-		              	return <div>
-		              		<table>
-								<tbody>
-									<tr>
-										<th>First Name</th>
-										<th>Surname</th>
-										<th>Gender</th>
-										<th>Region</th>
-									</tr>
-								</tbody>
-							</table>
-							<button onClick={getPerson}>
-  								Get person
-							</button>
-						</div>;
-		              		
-		            }
-	          	}
-	        }
-	    </Request>
+	return ( <div>
+      		<table>
+				<tbody id="mainTable">
+					<tr>
+						<th>First Name</th>
+						<th>Surname</th>
+						<th>Gender</th>
+						<th>Region</th>
+					</tr>
+					
+				</tbody>
+			</table>
+			<button onClick={getPerson}>
+				Get person
+			</button>
+		</div>
     );
 }
